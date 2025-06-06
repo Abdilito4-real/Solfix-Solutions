@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solfix Solutions - Solar Made Simple</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #FFD700;
+            --secondary: #003366;
+            --accent: #FF6B00;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-text: #E0E0E0;
+            --dark-text-secondary: #A0A0A0;
+            --success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--dark-bg);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #002244;
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark-surface);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-button {
+            display: none;
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu Content */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--dark-surface);
+            z-index: 1002;
+            transition: right 0.3s ease;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-menu-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--dark-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-top: 50px;
+            padding: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Show mobile menu button only on mobile */
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 150px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 500px;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--dark-text-secondary);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        /* Problem Solution Section */
+        .problem-solution {
+            background-color: var(--dark-surface);
+        }
+        
+        .ps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        .problems, .solutions {
+            flex: 1;
+            padding: 25px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .problems {
+            border-left: 4px solid #FF6B6B;
+        }
+        
+        .solutions {
+            border-left: 4px solid var(--success);
+        }
+        
+        .ps-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .ps-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .ps-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .problems .ps-icon {
+            color: #FF6B6B;
+        }
+        
+        .solutions .ps-icon {
+            color: var(--success);
+        }
+        
+        .ps-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark-text);
+        }
+        
+        .ps-item p {
+            color: var(--dark-text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--dark-bg);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            background-color: rgba(255, 215, 0, 0.1);
+            color: var(--primary);
+            font-size: 2rem;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            color: var(--dark-text-secondary);
+        }
+        
+        .service-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .quiz-cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Trust Builders Section */
+        .trust {
+            background-color: var(--dark-surface);
+        }
+        
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .trust-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .testimonial-video {
+            background-color: rgba(0, 0, 0, 0.3);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        /* Video Container Styles */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Disable download button */
+        video::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+
+        /* Hide download button in Edge */
+        video::-webkit-media-controls {
+            overflow: hidden !important;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            width: calc(100% + 32px);
+            margin-left: auto;
+        }
+        
+        .badge-wall {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .badge {
+            background-color: var(--dark-surface);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .badge img {
+            height: 30px;
+            width: auto;
+        }
+        
+        .counter {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+        
+        /* Products Section */
+        .products {
+            background-color: var(--dark-bg);
+        }
+        
+        .products-carousel {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 15px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .product-card {
+            min-width: 260px;
+            background-color: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            scroll-snap-align: start;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .product-image {
+            height: 160px;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-content {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Product Modal */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: var(--dark-surface);
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            cursor: pointer;
+        }
+        
+        .modal-product-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .modal-product-price {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .modal-product-description {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .modal-product-features {
+            margin-bottom: 30px;
+        }
+        
+        .modal-product-features h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .modal-product-features ul {
+            list-style-position: inside;
+            padding-left: 15px;
+        }
+        
+        .modal-product-features li {
+            margin-bottom: 8px;
+        }
+
+        /* About Section Styles */
+        .about-section {
+            background-color: var(--dark-surface);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--dark-text-secondary);
+        }
+        
+        .qualifications {
+            margin-top: 30px;
+        }
+        
+        .qualifications h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .qualifications-list {
+            list-style: none;
+        }
+        
+        .qualifications-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            color: var(--dark-text-secondary);
+        }
+        
+        .qualifications-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Contact Form Styles */
+        #contact-form {
+            background-color: var(--dark-surface);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        #contact-form input,
+        #contact-form textarea,
+        #contact-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--dark-text);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        #contact-form input:focus,
+        #contact-form textarea:focus,
+        #contact-form select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+        }
+
+        #contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        #contact-form button[type="submit"] {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        /* Form Feedback Messages */
+        #form-feedback {
+            margin-top: 15px;
+            display: none;
+        }
+
+        #form-feedback div {
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        #form-feedback .success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        #form-feedback .error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        /* Newsletter Form Styles */
+        #newsletter-form {
+            margin-top: 15px;
+        }
+        
+        #newsletter-email {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--dark-text);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        #newsletter-email:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0A0A0A;
+            color: var(--dark-text);
+            padding: 40px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: var(--dark-text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .contact-info {
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .contact-icon {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--dark-text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+        
+        /* Offer Bar */
+        .offer-bar {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            position: fixed;
+            top: 10%;
+            width: 100%;
+            z-index: 1002;
+            font-size: 0.9rem;
+        }
+        
+        .offer-bar p {
+            font-weight: 600;
+        }
+        
+        .offer-bar a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 5px;
+        }
+        
+        /* Quiz Styles */
+        .quiz-step {
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .quiz-option {
+            width: 100%;
+            text-align: left;
+        }
+        
+        #calculator-form input,
+        #calculator-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--dark-text);
+            border-radius: 4px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .ps-item {
+                flex-direction: column;
+            }
+            
+            .ps-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .product-card {
+                min-width: 85vw;
+            }
+            
+            .modal-content {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            
+            .offer-bar {
+                top: 8%;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-container {
+                padding: 40px;
+            }
+        
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .ps-container {
+                flex-direction: row;
+                gap: 30px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+            
+            .trust-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .about-content {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .about-image {
+                padding-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Offer Bar -->
+    <div class="offer-bar">
+        <p>First 10 customers this month get free maintenance! <a href="#contact">Claim Now</a></p>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">
+                    <img src="SSS-removebg-preview.png" alt="Solfix Solutions Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Button (Visible only on mobile) -->
+    <button id="mobile-menu-button" class="mobile-menu-button">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+    <!-- Mobile Menu Content -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button class="close-menu-button">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <h1>Zero Power Bills for Life – Get Solar Installed in 7 Days!</h1>
+            <p>Free Site Survey + 5-Year Guarantee – Pay ₦0 Upfront with Our Financing</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" id="show-calculator">Calculate Your Savings Now →</button>
+                <a href="tel:+2347011101458" class="btn btn-secondary">
+                    <i class="fas fa-phone-alt"></i> Call Our Solar Advisors
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Solution Section -->
+    <section class="section problem-solution">
+        <div class="container ps-container">
+            <div class="problems">
+                <h3 class="ps-title">Solar Pain Points</h3>
+                <div class="ps-item">
+                    <div class="ps-icon">☹️</div>
+                    <div>
+                        <h4>Tired of unreliable power and rising bills?</h4>
+                        <p>Nigerian grid electricity is unpredictable and expensive</p>
+                    </div>
+                </div>
+                <div class="ps-item">
+                    <div class="ps-icon">☹️</div>
+                    <div>
+                        <h4>Worried about fake solar installers?</h4>
+                        <p>Many providers use substandard equipment and disappear after installation</p>
+                    </div>
+                </div>
+                <div class="ps-item">
+                    <div class="ps-icon">☹️</div>
+                    <div>
+                        <h4>Confused by technical jargon?</h4>
+                        <p>Solar terminology can be overwhelming for first-time buyers</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solutions">
+                <h3 class="ps-title">Our Solutions</h3>
+                <div class="ps-item">
+                    <div class="ps-icon">✅</div>
+                    <div>
+                        <h4>24/7 Solar Monitoring</h4>
+                        <p>Track your energy production and usage via mobile app</p>
+                    </div>
+                </div>
+                <div class="ps-item">
+                    <div class="ps-icon">✅</div>
+                    <div>
+                        <h4>Certified Equipment</h4>
+                        <p>Jinko, Tesla, Luminous partners with authentic warranties</p>
+                    </div>
+                </div>
+                <div class="ps-item">
+                    <div class="ps-icon">✅</div>
+                    <div>
+                        <h4>No-Drama Warranty</h4>
+                        <p>Covers both labor and parts for complete peace of mind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Solar Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Installation</h3>
+                        <ul class="service-list">
+                            <li>Home & Business Systems</li>
+                            <li>Hybrid Solar Solutions</li>
+                            <li>Govt. Approval Support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Maintenance</h3>
+                        <ul class="service-list">
+                            <li>Panel Cleaning</li>
+                            <li>Fault Diagnostics</li>
+                            <li>Inverter Repairs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Equipment Sales</h3>
+                        <ul class="service-list">
+                            <li>Tier-1 Solar Panels</li>
+                            <li>Lithium Batteries</li>
+                            <li>Complete Kits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-cta">
+                <button class="btn btn-secondary" id="start-quiz">Not Sure What You Need? Take Our 30-Second Quiz</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trust Builders Section -->
+    <section class="section trust">
+        <div class="container">
+            <h2 class="section-title">Why Customers Trust Us</h2>
+            <div class="trust-grid">
+                <!-- Video Testimonial Card -->
+                <div class="trust-card">
+                    <div class="testimonial-video">
+                        <video width="100%" controls controlsList="nodownload" disablePictureInPicture poster="images/video-poster.jpg">
+                            <source src="Create a 45 second testimonial video featuring a Nigerian man.mp4" type="video/mp4">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <p>"Switching to solar with Solfix saved us ₦200k monthly! The installation was seamless."</p>
+                    <p><strong>— Adebayo's Family, Kaduna</strong></p>
+                </div>
+                
+                <div class="trust-card">
+                    <h3>Certified & Partners</h3>
+                    <div class="badge-wall">
+                        <div class="badge">
+                            <img src="nabcep.png" alt="NABCEP Certified">
+                        </div>
+                        <div class="badge">
+                            <img src="NIXIS-NEW-LOGO-4.png" alt="Nixis Partner">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="trust-card">
+                    <h3>Our Impact</h3>
+                    <div class="counter" id="panels-counter">0</div>
+                    <p>Solar Panels Installed</p>
+                    <div class="counter" id="energy-counter">0</div>
+                    <p>kWh Generated Today</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="section products" id="products">
+        <div class="container">
+            <h2 class="section-title">Best-Selling Solar Products</h2>
+            <div class="products-carousel">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-solar-panel" style="font-size: 3rem; color: var(--primary);"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">5kVA Solar Kit</h3>
+                        <p>Complete system for 4-bedroom home</p>
+                        <div class="product-price">₦2.3M</div>
+                        <button class="btn btn-primary view-product" data-product="5kva-solar-kit">View Details</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-bolt" style="font-size: 3rem; color: var(--primary);"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Luminous Inverter</h3>
+                        <p>Reliable power conversion with 2-year warranty</p>
+                        <div class="product-price">₦180k</div>
+                        <button class="btn btn-primary view-product" data-product="luminous-inverter">View Details</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-water" style="font-size: 3rem; color: var(--primary);"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Solar Water Pump</h3>
+                        <p>Ideal for farms and businesses</p>
+                        <div class="product-price">₦420k</div>
+                        <button class="btn btn-primary view-product" data-product="solar-water-pump">View Details</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-battery-three-quarters" style="font-size: 3rem; color: var(--primary);"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Lithium Battery 5kWh</h3>
+                        <p>Long-lasting energy storage solution</p>
+                        <div class="product-price">₦1,200,000M</div>
+                        <button class="btn btn-primary view-product" data-product="lithium-battery">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#products" class="btn btn-secondary">Shop All Products →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modals -->
+    <div class="product-modal" id="5kva-solar-kit-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-product-title">5kVA Solar Kit</h3>
+            <div class="modal-product-price">₦2.3M</div>
+            <div class="modal-product-description">
+                <p>A complete solar power solution designed for 4-bedroom homes, providing reliable 24/7 power supply with battery backup.</p>
+            </div>
+            <div class="modal-product-features">
+                <h4>Features:</h4>
+                <ul>
+                    <li>5kVA Hybrid Inverter with MPPT Charge Controller</li>
+                    <li>4 x 400W Mono-crystalline Solar Panels</li>
+                    <li>4 x 200Ah Deep Cycle Gel Batteries</li>
+                    <li>Complete installation kit with cables and accessories</li>
+                    <li>5-year warranty on equipment</li>
+                    <li>1-year free maintenance</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="product-modal" id="luminous-inverter-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-product-title">Luminous Inverter</h3>
+            <div class="modal-product-price">₦180k</div>
+            <div class="modal-product-description">
+                <p>High-quality power inverter with pure sine wave output, perfect for home and office use with sensitive electronics.</p>
+            </div>
+            <div class="modal-product-features">
+                <h4>Features:</h4>
+                <ul>
+                    <li>Pure sine wave output (clean power for sensitive devices)</li>
+                    <li>2-year manufacturer warranty</li>
+                    <li>Automatic voltage regulation</li>
+                    <li>Overload and short circuit protection</li>
+                    <li>Silent operation with no moving parts</li>
+                    <li>LED display for system status</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-modal" id="solar-water-pump-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-product-title">Solar Water Pump</h3>
+            <div class="modal-product-price">₦420k</div>
+            <div class="modal-product-description">
+                <p>Efficient solar-powered water pump system ideal for agricultural irrigation, livestock watering, and domestic water supply.</p>
+            </div>
+            <div class="modal-product-features">
+                <h4>Features:</h4>
+                <ul>
+                    <li>1HP DC solar pump with high efficiency motor</li>
+                    <li>Includes 2 x 300W solar panels</li>
+                    <li>Automatic dry run protection</li>
+                    <li>Stainless steel construction for durability</li>
+                    <li>Can lift water from up to 100m depth</li>
+                    <li>Flow rate: 20-30 liters per minute</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-modal" id="lithium-battery-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-product-title">Lithium Battery 5kWh</h3>
+            <div class="modal-product-price">₦1,200,000M</div>
+            <div class="modal-product-description">
+                <p>Advanced lithium iron phosphate (LiFePO4) battery system with superior performance and longevity compared to traditional lead-acid batteries.</p>
+            </div>
+            <div class="modal-product-features">
+                <h4>Features:</h4>
+                <ul>
+                    <li>5kWh usable capacity (expandable up to 20kWh)</li>
+                    <li>10+ year lifespan with 80% capacity retention</li>
+                    <li>Built-in battery management system (BMS)</li>
+                    <li>80% depth of discharge (vs 50% for lead-acid)</li>
+                    <li>Maintenance-free operation</li>
+                    <li>5-year warranty</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculator Modal -->
+    <div class="product-modal" id="calculator-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-product-title">Solar Savings Calculator</h3>
+            <div class="modal-product-description">
+                <p>Calculate how much you can save by switching to solar power.</p>
+                
+                <form id="calculator-form">
+                    <div style="margin-bottom: 15px;">
+                        <label>Current Monthly Electricity Bill (₦)</label>
+                        <input type="number" id="current-bill" required>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label>Daily Power Outage Hours</label>
+                        <input type="number" id="outage-hours" required>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label>Property Type</label>
+                        <select id="property-type" required>
+                            <option value="">Select property type</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="house">House</option>
+                            <option value="office">Office</option>
+                            <option value="business">Business</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Calculate Savings</button>
+                </form>
+                
+                <div id="calculator-results" style="margin-top: 20px; display: none;">
+                    <h4>Your Estimated Savings:</h4>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 5px;">
+                        <p>Monthly Savings: <strong id="monthly-savings">₦0</strong></p>
+                        <p>Annual Savings: <strong id="annual-savings">₦0</strong></p>
+                        <p>Recommended System: <strong id="recommended-system">None</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="product-modal" id="quiz-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-product-title">Find Your Perfect Solar Solution</h3>
+            <div class="modal-product-description">
+                <div id="quiz-step-1" class="quiz-step">
+                    <h4>Question 1 of 3</h4>
+                    <p>What is your primary reason for considering solar?</p>
+                    <div class="quiz-options">
+                        <button class="btn btn-secondary quiz-option" data-answer="cost">Reduce electricity costs</button>
+                        <button class="btn btn-secondary quiz-option" data-answer="reliability">More reliable power supply</button>
+                        <button class="btn btn-secondary quiz-option" data-answer="environment">Environmental benefits</button>
+                    </div>
+                </div>
+                
+                <div id="quiz-step-2" class="quiz-step" style="display: none;">
+                    <h4>Question 2 of 3</h4>
+                    <p>What is your average monthly electricity bill?</p>
+                    <div class="quiz-options">
+                        <button class="btn btn-secondary quiz-option" data-answer="low">Less than ₦20,000</button>
+                        <button class="btn btn-secondary quiz-option" data-answer="medium">₦20,000 - ₦50,000</button>
+                        <button class="btn btn-secondary quiz-option" data-answer="high">More than ₦50,000</button>
+                    </div>
+                </div>
+                
+                <div id="quiz-step-3" class="quiz-step" style="display: none;">
+                    <h4>Question 3 of 3</h4>
+                    <p>How many hours of power outages do you experience daily?</p>
+                    <div class="quiz-options">
+                        <button class="btn btn-secondary quiz-option" data-answer="few">Less than 4 hours</button>
+                        <button class="btn btn-secondary quiz-option" data-answer="some">4-8 hours</button>
+                        <button class="btn btn-secondary quiz-option" data-answer="many">More than 8 hours</button>
+                    </div>
+                </div>
+                
+                <div id="quiz-results" style="display: none; margin-top: 20px;">
+                    <h4>Recommended Solution:</h4>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 5px;">
+                        <p id="recommended-solution">Based on your answers, we recommend...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Solfix Solutions</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Founded in 2020, Solfix Solutions has been at the forefront of Nigeria's solar energy revolution, providing reliable and affordable solar solutions to homes and businesses across the country.</p>
+                    <p>Our mission is to make clean, sustainable energy accessible to everyone, helping Nigerians break free from unreliable grid power and expensive fuel costs.</p>
+                    <p>With a team of certified solar experts and engineers, we've installed over 1,700 solar panels and helped our clients save millions in energy costs.</p>
+                    
+                    <div class="qualifications">
+                        <h3>My Qualifications</h3>
+                        <ul class="qualifications-list">
+                            <li>Advanced Diploma in Solar Energy Technology from the Renewable Energy Institute, Abuja</li>
+                            <li>Nixis Ventures Certified Installer</li>
+                            <li>Certified Solar PV Designer from the Solar Energy International (SEI)</li>
+                            <li>5+ years of hands-on experience in solar system design and installation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="WhatsApp Image 2025-06-03 at 9.54.56 PM.jpeg" alt="Solfix Solutions Team">
+                    <img src="WhatsApp Image 2025-06-03 at 9.54.54 PM.jpeg" alt="Solfix Solutions Team">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section class="section" id="contact" style="background-color: var(--dark-surface);">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <form id="contact-form" action="https://formspree.io/f/mkgbnlaz" method="POST">
+                <!-- Hidden fields for Formspree -->
+                <input type="hidden" name="_subject" value="New Contact from Solfix Solutions">
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <!-- Name Fields Row -->
+                <div class="name-fields" style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div style="flex: 1;">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+                    </div>
+                </div>
+                
+                <!-- Email Field -->
+                <div style="margin-bottom: 15px;">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" placeholder="Your Email" required>
+                </div>
+                
+                <!-- Phone Field -->
+                <div style="margin-bottom: 15px;">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Phone (Optional)">
+                </div>
+                
+                <!-- Message Field -->
+                <div style="margin-bottom: 15px;">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Send Message
+                </button>
+                
+                <!-- Form submission feedback -->
+                <div id="form-feedback" style="display: none;"></div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col"><a href="#home">
+                    <img src="SSS-removebg-preview.png" alt="Solfix Solutions Logo" style="max-width: 150px; margin-bottom: 20px;"></a>
+                    <h3>Solfix Solutions</h3>
+                    <p style="color: var(--dark-text-secondary);">Your trusted solar energy partner in Nigeria, providing reliable and affordable solar solutions since 2020.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                            <span>+234 7011101458</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                            <span>hello@solfixsolutions@gmial.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Solar Installation</a></li>
+                        <li><a href="#">Maintenance</a></li>
+                        <li><a href="#">System Upgrade</a></li>
+                        <li><a href="#">Energy Audit</a></li>
+                        <li><a href="#">Financing</a></li>
+                    </ul>
+                </div>
+                
+               <div class="footer-col">
+    <h3>Newsletter</h3>
+    <p style="color: var(--dark-text-secondary);">Subscribe to get updates on solar technology and special offers.</p>
+    <form id="newsletter-form" action="https://formspree.io/f/xeokodbo" method="POST">
+        <input type="hidden" name="_subject" value="New Newsletter Subscriber - Solfix Solutions">
+        <input type="email" id="newsletter-email" name="email" placeholder="Your Email" required>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Subscribe</button>
+        <div id="newsletter-feedback" style="display: none; margin-top: 10px;"></div>
+    </form>
+</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Solfix Solutions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/2347011101458" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const menuButton = document.getElementById('mobile-menu-button');
+            const closeButton = document.querySelector('.close-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            function toggleMenu() {
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                
+                // Prevent scrolling when menu is open
+                if (mobileMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
+            }
+            
+            menuButton.addEventListener('click', toggleMenu);
+            closeButton.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+            
+            // Close menu when a link is clicked
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+            
+            // Close menu when ESC key is pressed
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+            
+            // Animated Counters
+            function animateCounter(id, target, duration) {
+                const element = document.getElementById(id);
+                const start = 0;
+                const increment = target / (duration / 16);
+                let current = start;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        clearInterval(timer);
+                        current = target;
+                    }
+                    element.textContent = Math.floor(current).toLocaleString();
+                }, 16);
+            }
+            
+            // Initialize counters when scrolled into view
+            function initCounters() {
+                const trustSection = document.querySelector('.trust');
+                const position = trustSection.getBoundingClientRect();
+                
+                if(position.top < window.innerHeight && position.bottom >= 0) {
+                    animateCounter('panels-counter', 1700, 2000);
+                    animateCounter('energy-counter', 1258, 2000);
+                    window.removeEventListener('scroll', initCounters);
+                }
+            }
+            
+            window.addEventListener('scroll', initCounters);
+            
+            // Initialize counters if already in view
+            if(document.querySelector('.trust').getBoundingClientRect().top < window.innerHeight) {
+                initCounters();
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if(target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Product View Buttons
+            document.querySelectorAll('.view-product').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const product = this.getAttribute('data-product');
+                    document.getElementById(`${product}-modal`).style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close Product Modals
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-modal').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('product-modal')) {
+                    e.target.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Calculator Button
+            document.getElementById('show-calculator').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('calculator-modal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Calculator Form Submission
+            document.getElementById('calculator-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple calculation example
+                const currentBill = parseFloat(document.getElementById('current-bill').value);
+                const monthlySavings = currentBill * 0.7; // Estimate 70% savings
+                const annualSavings = monthlySavings * 12;
+                
+                // Determine recommended system based on bill amount
+                let recommendedSystem = "3kVA Solar Kit";
+                if (currentBill > 50000) {
+                    recommendedSystem = "10kVA Solar Kit";
+                } else if (currentBill > 20000) {
+                    recommendedSystem = "5kVA Solar Kit";
+                }
+                
+                // Display results
+                document.getElementById('monthly-savings').textContent = '₦' + monthlySavings.toLocaleString();
+                document.getElementById('annual-savings').textContent = '₦' + annualSavings.toLocaleString();
+                document.getElementById('recommended-system').textContent = recommendedSystem;
+                document.getElementById('calculator-results').style.display = 'block';
+            });
+            
+            // Quiz Button
+            document.getElementById('start-quiz').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('quiz-modal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                // Reset quiz to first step
+                document.querySelectorAll('.quiz-step').forEach(step => step.style.display = 'none');
+                document.getElementById('quiz-step-1').style.display = 'block';
+                document.getElementById('quiz-results').style.display = 'none';
+            });
+            
+            // Quiz Logic
+            const quizAnswers = {};
+            let currentStep = 1;
+            
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.quiz-step').id.replace('quiz-step-', '');
+                    quizAnswers[`q${question}`] = this.getAttribute('data-answer');
+                    
+                    // Move to next question or show results
+                    if (currentStep < 3) {
+                        document.getElementById(`quiz-step-${currentStep}`).style.display = 'none';
+                        currentStep++;
+                        document.getElementById(`quiz-step-${currentStep}`).style.display = 'block';
+                    } else {
+                        // Show results
+                        document.getElementById(`quiz-step-${currentStep}`).style.display = 'none';
+                        showQuizResults();
+                    }
+                });
+            });
+            
+            function showQuizResults() {
+                // Simple recommendation logic
+                let recommendation = "5kVA Solar Kit";
+                
+                if (quizAnswers.q2 === 'high') {
+                    recommendation = "10kVA Solar Kit";
+                } else if (quizAnswers.q2 === 'low') {
+                    recommendation = "3kVA Solar Kit";
+                }
+                
+                if (quizAnswers.q3 === 'many') {
+                    recommendation += " with Battery Backup";
+                }
+                
+                document.getElementById('recommended-solution').textContent = 
+                    `Based on your answers, we recommend our ${recommendation}. This system will address your needs for ${quizAnswers.q1 === 'cost' ? 'cost savings' : quizAnswers.q1 === 'reliability' ? 'reliable power' : 'environmental impact'}.`;
+                
+                document.getElementById('quiz-results').style.display = 'block';
+                currentStep = 1; // Reset for next use
+            }
+            
+            // Get Quote Button in Quiz Results
+            document.getElementById('get-quote-btn').addEventListener('click', function() {
+                document.getElementById('quiz-modal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+                // Scroll to contact form
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Phone Link Fallback
+            document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if(!/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(this.href.replace('tel:', ''));
+                        alert('Phone number copied to clipboard: ' + this.href.replace('tel:', ''));
+                    }
+                });
+            });
+            
+            // Formspree Integration
+            document.getElementById('contact-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const form = e.target;
+                const submitButton = form.querySelector('button[type="submit"]');
+                const feedbackElement = document.getElementById('form-feedback');
+                
+                // Store original button text
+                const originalButtonText = submitButton.textContent;
+                
+                try {
+                    // Show loading state
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Sending...';
+                    feedbackElement.style.display = 'none';
+                    
+                    // Get form data
+                    const formData = new FormData(form);
+                    
+                    // Set the _replyto field from the email input
+                    formData.set('_replyto', formData.get('email'));
+                    
+                    // Send to Formspree
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Success
+                        feedbackElement.style.display = 'block';
+                        feedbackElement.innerHTML = `
+                            <div style="background-color: rgba(40, 167, 69, 0.2); 
+                                       color: var(--success); 
+                                       padding: 10px; 
+                                       border-radius: 4px;">
+                                <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+                            </div>
+                        `;
+                        form.reset();
+                    } else {
+                        // Error from Formspree
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    // Network or other errors
+                    feedbackElement.style.display = 'block';
+                    feedbackElement.innerHTML = `
+                        <div style="background-color: rgba(220, 53, 69, 0.2); 
+                                   color: #dc3545; 
+                                   padding: 10px; 
+                                   border-radius: 4px;">
+                            <i class="fas fa-exclamation-circle"></i> There was an error sending your message. Please try again later.
+                        </div>
+                    `;
+                    console.error('Form submission error:', error);
+                } finally {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                }
+            });
+            
+           // Newsletter Form Submission
+document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const emailInput = document.getElementById('newsletter-email');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const feedbackEl = document.getElementById('newsletter-feedback');
+    
+    // Store original button text
+    const originalBtnText = submitBtn.textContent;
+    
+    try {
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Subscribing...';
+        feedbackEl.style.display = 'none';
+        
+        // Send to Formspree
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            // Success
+            feedbackEl.style.display = 'block';
+            feedbackEl.innerHTML = `
+                <div style="background-color: rgba(40, 167, 69, 0.2); 
+                           color: var(--success); 
+                           padding: 10px; 
+                           border-radius: 4px;">
+                    <i class="fas fa-check-circle"></i> Thank you for subscribing! You'll hear from us soon.
+                </div>
+            `;
+            form.reset();
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        // Error
+        feedbackEl.style.display = 'block';
+        feedbackEl.innerHTML = `
+            <div style="background-color: rgba(220, 53, 69, 0.2); 
+                       color: #dc3545; 
+                       padding: 10px; 
+                       border-radius: 4px;">
+                <i class="fas fa-exclamation-circle"></i> Subscription failed. Please try again later.
+            </div>
+        `;
+        console.error('Subscription error:', error);
+    } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+    }
+});
+            });
+    </script>
+</body>
+</html>
